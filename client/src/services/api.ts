@@ -21,11 +21,29 @@ api.interceptors.request.use(
     
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+      console.log('Added token to request:', config.url);
+    } else {
+      console.log('No token available for request:', config.url);
     }
+    
+    // Add debugging
+    console.log(`Making request to: ${config.url} with method: ${config.method}`);
     
     return config;
   },
   (error) => Promise.reject(error)
+);
+
+// Add response interceptor for debugging
+api.interceptors.response.use(
+  (response) => {
+    console.log(`Response from ${response.config.url}: Status ${response.status}`);
+    return response;
+  },
+  (error) => {
+    console.error(`Error response from ${error.config?.url}:`, error.response?.status, error.response?.data);
+    return Promise.reject(error);
+  }
 );
 
 // Authentication API calls
@@ -54,7 +72,7 @@ export const getProfile = async (): Promise<User> => {
 // Content API calls
 export const getContent = async (contentType?: ContentType, folderId?: string | null) => {
   try {
-    let url = `${API_URL}/content`;
+    let url = `/content`;
     const params: Record<string, string> = {};
     
     if (contentType) {

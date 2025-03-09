@@ -26,19 +26,25 @@ export const protect = async (req: Request, res: Response, next: NextFunction) =
     }
     
     if (!token) {
+      console.log('No token provided in request');
       return res.status(401).json({ message: 'Not authorized, no token provided' });
     }
     
-    // Verify token
-    const decoded = jwt.verify(
-      token, 
-      process.env.JWT_SECRET || 'your-secret-key'
-    ) as DecodedToken;
-    
-    // Add user to request
-    req.user = decoded;
-    
-    next();
+    try {
+      // Verify token
+      const decoded = jwt.verify(
+        token, 
+        process.env.JWT_SECRET || 'your-secret-key'
+      ) as DecodedToken;
+      
+      // Add user to request
+      req.user = decoded;
+      
+      next();
+    } catch (tokenError) {
+      console.error('Token verification failed:', tokenError);
+      res.status(401).json({ message: 'Not authorized, token invalid' });
+    }
   } catch (error) {
     console.error('Auth middleware error:', error);
     res.status(401).json({ message: 'Not authorized, token failed' });

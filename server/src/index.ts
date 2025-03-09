@@ -49,8 +49,12 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-// Routes
+// Routes with and without /api prefix
+app.use('/content', contentRoutes);
+app.use('/folders', folderRoutes);
 app.use('/auth', authRoutes);
+
+// Keep your existing routes
 app.use('/api/content', contentRoutes);
 app.use('/api/folders', folderRoutes);
 app.use('/api/auth', authRoutes);
@@ -68,6 +72,15 @@ app.get('/test-cors', (req, res) => {
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path}`);
   next();
+});
+
+// Add these direct route handlers for debugging
+app.get('/direct-test', (req, res) => {
+  res.status(200).json({ message: 'Direct GET test successful' });
+});
+
+app.post('/direct-test', (req, res) => {
+  res.status(200).json({ message: 'Direct POST test successful', body: req.body });
 });
 
 // Global error handler with more detailed logging
