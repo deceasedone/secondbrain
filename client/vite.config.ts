@@ -7,12 +7,11 @@ import tailwindcss from '@tailwindcss/vite';
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "::",
-    port: 8080,
+    host: "::", // This allows access from any IPv6 address
   },
   plugins: [
     react(),
-    tailwindcss(), // This is correctly positioned
+    tailwindcss(),
     mode === 'development' && componentTagger()
   ].filter(Boolean),
   resolve: {
