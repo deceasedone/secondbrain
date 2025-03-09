@@ -27,7 +27,7 @@ A modern knowledge management tool to store, organize, and share your digital co
 ### Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/deceasedone/secondbrain.git
 cd second-brain
 ```
 
