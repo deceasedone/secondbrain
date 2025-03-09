@@ -28,17 +28,6 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Add response interceptor to handle errors
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.message === 'Network Error') {
-      console.error('CORS or network error occurred:', error);
-    }
-    return Promise.reject(error);
-  }
-);
-
 // Authentication API calls
 export const register = async (username: string, email: string, password: string): Promise<{ message: string; user: User }> => {
   const response = await api.post('/auth/register', {

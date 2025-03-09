@@ -14,29 +14,32 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/second-brain';
 
-// CORS configuration
-const allowedOrigins = process.env.ALLOWED_ORIGINS 
-  ? process.env.ALLOWED_ORIGINS.split(',') 
-  : ['http://localhost:5173', 'https://secondbrain-pi.vercel.app']; // Add your Vercel URL
-
+// CORS configuration with debugging
 app.use(cors({
   origin: function(origin, callback) {
-    // Allow requests with no origin (like mobile apps, curl requests)
-    if (!origin) return callback(null, true);
+    console.log('Request origin:', origin);
     
-    if (allowedOrigins.indexOf(origin) === -1) {
-      console.log(`Request from origin ${origin} not allowed by CORS policy`);
-      const msg = `The CORS policy for this site does not allow access from the specified Origin: ${origin}`;
-      return callback(new Error(msg), false);
-    }
+    // For development/debugging - allow all origins
+    // Remove this in production
     return callback(null, true);
+    
+    // Original CORS logic
+    /*
+    const allowedOrigins = ['https://secondbrain-pi.vercel.app', 'http://localhost:5173'];
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.log(`Origin ${origin} not allowed by CORS`);
+      callback(new Error('Not allowed by CORS'), false);
+    }
+    */
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Handle preflight requests
+// Handle preflight requests explicitly
 app.options('*', cors());
 
 app.use(express.json());
@@ -46,9 +49,33 @@ app.use('/api/content', contentRoutes);
 app.use('/api/folders', folderRoutes);
 app.use('/api/auth', authRoutes);
 
-// Global error handler - must be after routes
+// Add a simple test endpoint
+app.get('/test-cors', (req, res) => {
+  console.log('Test CORS endpoint hit');
+  res.header('Access-Control-Allow-Origin', 'https://secondbrain-pi.vercel.app');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.status(200).json({ message: 'CORS is working!' });
+});
+
+// Add debug logging for all requests
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
+
+// Global error handler with more detailed logging
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  console.error('Global error handler:', err);
+  console.error('Global error handler:');
+  console.error('Request path:', req.path);
+  console.error('Request method:', req.method);
+  console.error('Error:', err);
+  
+  // Make sure CORS headers are set even in error responses
+  res.header('Access-Control-Allow-Origin', 'https://secondbrain-pi.vercel.app');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  
   res.status(500).json({
     message: 'Internal server error',
     error: err.message
