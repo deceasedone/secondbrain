@@ -42,9 +42,15 @@ app.use(cors({
 // Handle preflight requests explicitly
 app.options('*', cors());
 
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.originalUrl}`);
+  next();
+});
+
 app.use(express.json());
 
 // Routes
+app.use('/auth', authRoutes);
 app.use('/api/content', contentRoutes);
 app.use('/api/folders', folderRoutes);
 app.use('/api/auth', authRoutes);
