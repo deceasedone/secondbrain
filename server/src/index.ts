@@ -74,15 +74,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Add these direct route handlers for debugging
-app.get('/direct-test', (req, res) => {
-  res.status(200).json({ message: 'Direct GET test successful' });
-});
-
-app.post('/direct-test', (req, res) => {
-  res.status(200).json({ message: 'Direct POST test successful', body: req.body });
-});
-
 // Global error handler with more detailed logging
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error('Global error handler:');

@@ -56,19 +56,21 @@ const TestimonialsSection: React.FC = () => {
   ]
 
   return (
-    <section id="testimonials" className="section-padding bg-linear-to-b from-white to-secondary-50">
-      <div className="container">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-sm font-medium px-4 py-1.5 bg-accent-100 text-accent-700 rounded-full opacity-0 animate-on-scroll">
-            Testimonials
-          </span>
-          <h2 className="text-3xl md:text-4xl font-display font-bold mt-4 opacity-0 animate-on-scroll">
-            Trusted by Knowledge Workers Worldwide
-          </h2>
-          <p className="text-lg text-muted-foreground mt-4 opacity-0 animate-on-scroll">
-            Join thousands of professionals who rely on SecondBrain to organize their digital lives.
-          </p>
-        </div>
+<section id="testimonials" className="section-padding bg-linear-to-b from-white to-secondary-50 dark:from-gray-900 dark:to-gray-800">
+  <div className="container">
+    <div className="text-center max-w-3xl mx-auto mb-16">
+      <span className="text-sm font-medium px-4 py-1.5 bg-accent-100 dark:bg-accent-900/30 text-accent-700 dark:text-accent-300 rounded-full opacity-0 animate-on-scroll" style={{ color: '#aa40bf' }}>
+        Testimonials
+      </span>
+      <h2 className="text-3xl md:text-4xl font-display font-bold mt-4 opacity-0 animate-on-scroll dark:text-white" style={{ color: '#aa40bf' }}>
+        Trusted by Knowledge Workers Worldwide
+      </h2>
+      <p className="text-lg text-muted-foreground dark:text-white mt-4 opacity-0 animate-on-scroll" style={{ color: '#aa40bf' }}>
+        Join thousands of professionals who rely on SecondBrain to organize their digital lives.
+      </p>
+    </div>
+
+
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
@@ -82,23 +84,23 @@ const TestimonialsSection: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-16 p-8 rounded-xl bg-white border border-border shadow-lg opacity-0 animate-on-scroll">
+        <div className="mt-16 p-8 rounded-xl bg-white dark:bg-gray-800 border border-border dark:border-gray-700 shadow-lg opacity-0 animate-on-scroll">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="p-4 rounded-lg hover:bg-secondary-50 transition-colors">
-              <p className="text-4xl font-display font-bold text-gradient">10K+</p>
-              <p className="text-muted-foreground mt-2">Active Users</p>
+            <div className="p-4 rounded-lg hover:bg-secondary-50 dark:hover:bg-gray-700 transition-colors">
+              <p className="text-4xl font-display font-bold text-gradient dark:text-accent-400">10K+</p>
+              <p className="text-muted-foreground dark:text-gray-300 mt-2">Active Users</p>
             </div>
-            <div className="p-4 rounded-lg hover:bg-secondary-50 transition-colors">
-              <p className="text-4xl font-display font-bold text-gradient">5M+</p>
-              <p className="text-muted-foreground mt-2">Items Saved</p>
+            <div className="p-4 rounded-lg hover:bg-secondary-50 dark:hover:bg-gray-700 transition-colors">
+              <p className="text-4xl font-display font-bold text-gradient dark:text-accent-400">5M+</p>
+              <p className="text-muted-foreground dark:text-gray-300 mt-2">Items Saved</p>
             </div>
-            <div className="p-4 rounded-lg hover:bg-secondary-50 transition-colors">
-              <p className="text-4xl font-display font-bold text-gradient">100K+</p>
-              <p className="text-muted-foreground mt-2">Folders Created</p>
+            <div className="p-4 rounded-lg hover:bg-secondary-50 dark:hover:bg-gray-700 transition-colors">
+              <p className="text-4xl font-display font-bold text-gradient dark:text-accent-400">100K+</p>
+              <p className="text-muted-foreground dark:text-gray-300 mt-2">Folders Created</p>
             </div>
-            <div className="p-4 rounded-lg hover:bg-secondary-50 transition-colors">
-              <p className="text-4xl font-display font-bold text-gradient">4.8/5</p>
-              <p className="text-muted-foreground mt-2">User Rating</p>
+            <div className="p-4 rounded-lg hover:bg-secondary-50 dark:hover:bg-gray-700 transition-colors">
+              <p className="text-4xl font-display font-bold text-gradient dark:text-accent-400">4.8/5</p>
+              <p className="text-muted-foreground dark:text-gray-300 mt-2">User Rating</p>
             </div>
           </div>
         </div>

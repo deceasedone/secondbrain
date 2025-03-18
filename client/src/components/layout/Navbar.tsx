@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled ? "py-3 bg-white/90 backdrop-blur-md shadow-xs" : "py-5 bg-transparent",
+        scrolled ? "py-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-xs" : "py-5 bg-transparent",
       )}
     >
       <div className="container flex items-center justify-between">
@@ -141,11 +141,11 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - Updated for dark mode */}
       <div
         className={cn(
-          "md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md shadow-md transition-all duration-300 overflow-hidden",
-          isOpen ? "max-h-[500px] border-b border-border" : "max-h-0",
+          "md:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-md transition-all duration-300 overflow-hidden",
+          isOpen ? "max-h-[500px] border-b border-border dark:border-gray-700" : "max-h-0",
         )}
       >
         <div className="container py-4">
@@ -154,7 +154,7 @@ const Navbar: React.FC = () => {
               <li key={link.name}>
                 <a
                   href={link.href}
-                  className="block py-2 text-foreground font-medium hover:text-accent transition-colors"
+                  className="block py-2 text-foreground dark:text-gray-200 font-medium hover:text-accent dark:hover:text-accent transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}
@@ -163,10 +163,20 @@ const Navbar: React.FC = () => {
             ))}
           </ul>
           <div className="flex flex-col gap-3 mt-6">
-            <AnimatedButton variant="outline" fullWidth onClick={handleLogin}>
+            <AnimatedButton 
+              variant="outline" 
+              fullWidth 
+              onClick={handleLogin}
+              className="border-gray-300 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
+            >
               Log In
             </AnimatedButton>
-            <AnimatedButton variant="primary" fullWidth onClick={handleSignup}>
+            <AnimatedButton 
+              variant="primary" 
+              fullWidth 
+              onClick={handleSignup}
+              className="dark:bg-accent/90 dark:hover:bg-accent"
+            >
               Sign Up
             </AnimatedButton>
           </div>
