@@ -64,7 +64,7 @@ const CtaSection: React.FC = () => {
                 {features.map((feature) => (
                   <div
                     key={feature}
-                    className="flex items-center gap-3 p-2 rounded-lg hover:bg-secondary-50 dark:hover:bg-gray-700 transition-colors"
+                    className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
                     <div className="shrink-0 w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
                       <Check className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />

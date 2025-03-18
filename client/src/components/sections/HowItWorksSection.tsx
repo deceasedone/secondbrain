@@ -78,15 +78,16 @@ const HowItWorksSection: React.FC = () => {
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
-            <span 
-              className="text-sm font-medium px-4 py-1.5 rounded-full opacity-0 animate-on-scroll"
-              style={{
-                backgroundColor: isDarkMode ? 'rgba(79, 70, 229, 0.2)' : 'var(--accent-100)',
-                color: isDarkMode ? 'var(--accent-300)' : 'var(--accent-700)'
-              }}
-            >
-              How It Works
-            </span>
+          <span
+  className="text-sm font-medium px-4 py-1.5 rounded-full opacity-0 animate-on-scroll"
+  style={{
+    backgroundColor: '#bb66cc',
+    color: isDarkMode ? 'var(--accent-300)' : 'var(--accent-700)',
+  }}
+>
+  How It Works
+</span>
+
             <h2 
               className="text-3xl md:text-4xl font-display font-bold mt-4 opacity-0 animate-on-scroll"
               style={{ color: isDarkMode ? 'white' : 'inherit' }}
